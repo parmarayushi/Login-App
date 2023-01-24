@@ -1,0 +1,121 @@
+<div class="d-flex align-items-center justify-content-center h-100">
+    <form class="shadow rounded-5 w-50 p-5" [formGroup]="registrationForm" (ngSubmit)="onSignUp()">
+        <div class="pb-4">
+            <h2 class="text-primary fw-bold">Sign Up</h2>
+            <small class="text-muted">Enter your Details to Register Yourself.</small>
+        </div>
+
+        <div class="mb-3">
+            <label for="firstName" class="form-label text-primary fs-5">First Name</label>
+            <small *ngIf="getControls['firstName'].errors && getControls['firstName'].errors['required']"
+                class="text-danger fw-bold">
+                *
+            </small>
+            <input type="text" class="form-control pe-5" id="firstName" formControlName="firstName">
+            <div *ngIf="getControls['firstName'].touched && getControls['firstName'].errors || formSubmitted">
+                <small *ngIf="getControls['firstName'].errors && getControls['firstName'].errors['required']"
+                    class="text-danger">
+                    firstName is required.
+                </small>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="lastName" class="form-label text-primary fs-5">Last Name</label>
+            <small *ngIf="getControls['lastName'].errors && getControls['lastName'].errors['required']"
+                class="text-danger fw-bold">
+                *
+            </small>
+            <input type="text" class="form-control pe-5" id="lastName" formControlName="lastName">
+            <div *ngIf="getControls['lastName'].touched && getControls['lastName'].errors || formSubmitted">
+                <small *ngIf="getControls['lastName'].errors && getControls['lastName'].errors['required']"
+                    class="text-danger">
+                    lastName is required.
+                </small>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label text-primary fs-5">E-mail</label>
+            <small *ngIf="getControls['email'].errors && getControls['email'].errors['required']"
+                class="text-danger fw-bold">
+                *
+            </small>
+            <div class="position-relative">
+                <input type="email" class="form-control pe-5" id="email" formControlName="email">
+                <span class="icon icon-envelop text-primary"></span>
+            </div>
+            <div *ngIf="getControls['email'].touched && getControls['email'].errors || formSubmitted">
+                <small *ngIf="getControls['email'].errors && getControls['email'].errors['required']"
+                    class="text-danger">
+                    email is required.
+                </small>
+                <small *ngIf="getControls['email'].errors?.['pattern']" class="text-danger">
+                    enter proper email format.
+                </small>
+            </div>
+        </div>
+
+        <div formGroupName="password">
+            <div class="mb-3">
+                <label for="password" class="form-label text-primary fs-5">Password</label>
+                <small *ngIf="getControls['password'].get('password')?.errors?.['required']"
+                    class="text-danger fw-bold">
+                    *
+                </small>
+                <div class="position-relative">
+                    <input [type]="passwordFieldsVisibility['password'] === 'close' ? 'password' : 'text'"
+                        class="form-control pe-5" id="password" formControlName="password">
+                    <span class="icon icon-eye text-primary"
+                        *ngIf="getControls['password'].get('password')?.value?.length"
+                        (mousedown)="setPasswordVisibility('password', 'open')"
+                        (mouseup)="setPasswordVisibility('password', 'close')"
+                        (touchstart)="setPasswordVisibility('password', 'open')"
+                        (touchend)="setPasswordVisibility('password', 'close')"></span>
+                </div>
+                <div
+                    *ngIf="(getControls['password'].get('password')?.touched || getControls['password'].get('password')?.dirty || formSubmitted)">
+                    <small *ngIf="getControls['password'].get('password')?.errors?.['required']" class="text-danger">
+                        password is required.
+                    </small>
+                    <small
+                        *ngIf="getControls['password'].get('password')?.errors?.['pattern'] || (getControls['password'].get('password')?.errors?.['minlength'] || getControls['password'].get('password')?.errors?.['maxlength'])"
+                        class="text-danger">
+                        password must be 8-12 characters long, 1 numeric character, 1 uppercase letter,
+                        1 lowercase letter, & 1 special character.
+                    </small>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="confirmPassword" class="form-label text-primary fs-5">Confirm password</label>
+                <small *ngIf="getControls['password'].get('confirmPassword')?.errors?.['required']"
+                    class="text-danger fw-bold">
+                    *
+                </small>
+                <div class="position-relative">
+                    <input [type]="passwordFieldsVisibility['confirmPassword'] === 'close' ? 'password' : 'text'"
+                        class="form-control pe-5" id="confirmPassword" formControlName="confirmPassword">
+                    <span class="icon icon-eye text-primary"
+                        *ngIf="getControls['password'].get('confirmPassword')?.value?.length"
+                        (mousedown)="setPasswordVisibility('confirmPassword', 'open')"
+                        (mouseup)="setPasswordVisibility('confirmPassword', 'close')"
+                        (touchstart)="setPasswordVisibility('confirmPassword', 'open')"
+                        (touchend)="setPasswordVisibility('confirmPassword', 'close')"></span>
+                </div>
+                <div
+                    *ngIf="(getControls['password'].get('confirmPassword')?.touched || getControls['password'].get('confirmPassword')?.dirty || formSubmitted)">
+                    <small *ngIf="getControls['password'].get('confirmPassword')?.errors?.['required']"
+                        class="text-danger">
+                        confirmPassword is required.
+                    </small>
+                    <small
+                        *ngIf="!getControls['password'].get('confirmPassword')?.errors?.['required'] && getControls['password']?.errors?.['passwordsDoNotMatch']"
+                        class="text-danger">
+                        passwords did not match.
+                    </small>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3 w-100">SIGN UP</button>
+    </form>
+</div>
