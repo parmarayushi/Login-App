@@ -1,0 +1,19 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "aayushi123@gmail.com",
+            "pass": "ayushi@123"
+        },
+        {
+            "id": 2,
+            "name": "abhishek123@gmail.com",
+            "pass": "abhishek@123"
+        },
+        {
+            "id": 3,
+            "name": "mrunal123@gmail.com",
+            "pass": "mrunal@123"
+        }
+    ]
+}

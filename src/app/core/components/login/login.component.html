@@ -1,0 +1,42 @@
+<div class="d-flex align-items-center justify-content-center h-100">
+    <form class="shadow rounded-5 w-50 p-5" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <h2 class="text-primary fw-bold pb-4">Log In</h2>
+        <div class="mb-3">
+            <label for="email" class="form-label text-primary fs-5">E-mail</label>
+            <small *ngIf="getControls['email'].errors && getControls['email'].errors['required']"
+                class="text-danger fw-bold">
+                *
+            </small>
+            <div class="position-relative">
+                <input type="email" class="form-control pe-5" id="email" formControlName="email">
+                <span class="icon icon-envelop text-primary"></span>
+            </div>
+            <div *ngIf="getControls['email'].touched && getControls['email'].errors || formSubmitted">
+                <small *ngIf="getControls['email'].errors && getControls['email'].errors['required']"
+                    class="text-danger">
+                    email is required.
+                </small>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label text-primary fs-5">Password</label>
+            <small *ngIf="getControls['password'].errors && getControls['password'].errors['required']"
+                class="text-danger fw-bold">
+                *
+            </small>
+            <div class="position-relative">
+                <input type="password" class="form-control pe-5" id="password" formControlName="password">
+                <span class="icon icon-lock text-primary"></span>
+            </div>
+            <div *ngIf="getControls['password'].touched && getControls['password'].errors || formSubmitted">
+                <small *ngIf="getControls['password'].errors && getControls['password'].errors['required']"
+                    class="text-danger">
+                    password is required.
+                </small>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3 w-100">LOG IN</button>
+        <p class="text-center mb-0 pt-4">Don't Have an Account? <span class="text-primary fw-bold cursor-pointer">Sign
+                In</span></p>
+    </form>
+</div>
